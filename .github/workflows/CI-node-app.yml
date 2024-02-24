@@ -1,0 +1,27 @@
+name: nodeAppCI
+
+on:
+  workflow_dispatch:
+
+  push:
+    brances:
+      - 'main'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependies
+        uses: npm ci
+
+      - name: Run test
+        uses: npm test
